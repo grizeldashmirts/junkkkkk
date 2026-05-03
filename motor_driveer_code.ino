@@ -5,17 +5,23 @@
   // with map function
   // absolute value
   if(speed < -100 || speed > 100){
-  serial.println("unvalid speed")
+  Serial.println("unvalid speed");
   }
   else{
     if(speed == 0){
-      
+      analogWrite(in1, 0);
+      analogWrite(in2, 0);
     }
     else if(speed < 0){
-
+      speed = map(speed, 0, 100, 0, 255);
+      analogWrite(in1, speed);
+      analogWrite(in2, 0);
     }
     else{
-
+      speed = abs(speed);
+      speed = map(speed, 0, 100, 0, 255);
+      analogWrite(in1, 0);
+      analogWrite(in2, speed);
     }
   }
 
@@ -24,7 +30,8 @@
 void setup() {
   // put your setup code here, to run once:
   pinMode(in1, OUTPUT);
-  pinMOde(in2, OUTPUT)
+  pinMOde(in2, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
