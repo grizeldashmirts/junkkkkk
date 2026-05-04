@@ -5,9 +5,8 @@
   // with map function
   // absolute value
   if(speed < -100 || speed > 100){
-  Serial.println("unvalid speed");
+  speed = constrain(speed, -100, 100)
   }
-  else{
     if(speed == 0){
       analogWrite(in1, 0);
       analogWrite(in2, 0);
@@ -23,7 +22,6 @@
       analogWrite(in1, 0);
       analogWrite(in2, speed);
     }
-  }
 
   }
 
@@ -36,5 +34,12 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
- 
+ motGo(50)
+ delay(1000)
+ motGo(150)
+ delay(1000)
+ motGo(-50)
+ delay(1000)
+ motGo(-150)
+ delay(1000)
 }
