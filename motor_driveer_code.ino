@@ -11,7 +11,7 @@
       analogWrite(in1, 0);
       analogWrite(in2, 0);
     }
-    else if(speed < 0){
+    else if(speed > 0){
       speed = map(speed, 0, 100, 0, 255);
       analogWrite(in1, speed);
       analogWrite(in2, 0);
