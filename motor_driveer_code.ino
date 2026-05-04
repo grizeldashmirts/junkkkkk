@@ -22,7 +22,7 @@
       analogWrite(in1, 0);
       analogWrite(in2, speed);
     }
-
+    Serial.println(speed);
   }
 
 void setup() {
