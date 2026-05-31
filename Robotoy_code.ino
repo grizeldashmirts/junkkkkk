@@ -1,22 +1,22 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 int in1 = 5;
 int in2 = 6;
 int trig = 10;
 int echo = 9;
-int getDist() {
+float getDist() {
   digitalWrite(trig, LOW);
-  delay(2);
+  delayMicroseconds(2);
   digitalWrite(trig, HIGH);
-  delay(10);
+  delayMicroseconds(10);
   digitalWrite(trig, LOW);
   float dur, dist;
   dur = pulseIn(echo, HIGH);
   dist = (dur * .0343) / 2;
+  return dist;
 }
 void motGo(int speed) {
-  // speed between -100 and 100
-  // with map function
-  // absolute value
-  if (speed < -100 || speed > 100) {
     speed = constrain(speed, -100, 100);
   }
   if (speed == 0) {
@@ -40,20 +40,52 @@ void setup() {
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
   pinMode(trig, OUTPUT);
-  pinMOde(echo, INPUT);
+  pinMode(echo, INPUT);
   Serial.begin(115200);
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("Welcome Human!");
+  delay(5000);
+  lcd.clear();
+  lcd.print("Distance: ");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   motGo(50);
+lcd.setCursor(0, 1);
+lcd.print("                ");
+lcd.setCursor(0, 1);
+lcd.print(getDist());
+lcd.print("cm");
   delay(1000);
   motGo(150);
+lcd.setCursor(0, 1);
+lcd.print("                ");
+lcd.setCursor(0, 1);
+lcd.print(getDist());
+lcd.print("cm");
   delay(1000);
   motGo(0);
+lcd.setCursor(0, 1);
+lcd.print("                ");
+lcd.setCursor(0, 1);
+lcd.print(getDist());
+lcd.print("cm");
   delay(1000);
   motGo(-50);
+lcd.setCursor(0, 1);
+lcd.print("                ");
+lcd.setCursor(0, 1);
+lcd.print(getDist());
+lcd.print("cm");
   delay(1000);
   motGo(-150);
+lcd.setCursor(0, 1);
+lcd.print("                ");
+lcd.setCursor(0, 1);
+lcd.print(getDist());
+lcd.print("cm");
   delay(1000);
 }
