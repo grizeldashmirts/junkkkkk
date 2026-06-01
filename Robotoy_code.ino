@@ -5,6 +5,12 @@ int in1 = 5;
 int in2 = 6;
 int trig = 10;
 int echo = 9;
+void updLcd() {
+  lcd.clear();
+  lcd.print("Distance:");
+  lcd.print(getDist());
+  lcd.print("cm");
+}
 float getDist() {
   digitalWrite(trig, LOW);
   delayMicroseconds(2);
@@ -17,22 +23,22 @@ float getDist() {
   return dist;
 }
 void motGo(int speed) {
-    speed = constrain(speed, -100, 100);
-  }
-  if (speed == 0) {
-    analogWrite(in1, 0);
-    analogWrite(in2, 0);
-  } else if (speed > 0) {
-    speed = map(speed, 0, 100, 0, 255);
-    analogWrite(in1, speed);
-    analogWrite(in2, 0);
-  } else {
-    speed = abs(speed);
-    speed = map(speed, 0, 100, 0, 255);
-    analogWrite(in1, 0);
-    analogWrite(in2, speed);
-  }
-  Serial.println(speed);
+  speed = constrain(speed, -100, 100);
+}
+if (speed == 0) {
+  analogWrite(in1, 0);
+  analogWrite(in2, 0);
+} else if (speed > 0) {
+  speed = map(speed, 0, 100, 0, 255);
+  analogWrite(in1, speed);
+  analogWrite(in2, 0);
+} else {
+  speed = abs(speed);
+  speed = map(speed, 0, 100, 0, 255);
+  analogWrite(in1, 0);
+  analogWrite(in2, speed);
+}
+Serial.println(speed);
 }
 
 void setup() {
@@ -47,45 +53,23 @@ void setup() {
   lcd.setCursor(0, 0);
   lcd.print("Welcome Human!");
   delay(5000);
-  lcd.clear();
-  lcd.print("Distance: ");
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   motGo(50);
-lcd.setCursor(0, 1);
-lcd.print("                ");
-lcd.setCursor(0, 1);
-lcd.print(getDist());
-lcd.print("cm");
+  updLcd();
   delay(1000);
   motGo(150);
-lcd.setCursor(0, 1);
-lcd.print("                ");
-lcd.setCursor(0, 1);
-lcd.print(getDist());
-lcd.print("cm");
+  updLcd();
   delay(1000);
   motGo(0);
-lcd.setCursor(0, 1);
-lcd.print("                ");
-lcd.setCursor(0, 1);
-lcd.print(getDist());
-lcd.print("cm");
+  updLcd();
   delay(1000);
   motGo(-50);
-lcd.setCursor(0, 1);
-lcd.print("                ");
-lcd.setCursor(0, 1);
-lcd.print(getDist());
-lcd.print("cm");
+  updLcd();
   delay(1000);
   motGo(-150);
-lcd.setCursor(0, 1);
-lcd.print("                ");
-lcd.setCursor(0, 1);
-lcd.print(getDist());
-lcd.print("cm");
+  updLcd();
   delay(1000);
 }
