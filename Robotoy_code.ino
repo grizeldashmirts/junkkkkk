@@ -23,7 +23,7 @@ float getDist() {
   return dist;
 }
 void motGo(int speed) {
-  originalSpeed = speed;
+  int originalSpeed = speed;
   speed = constrain(speed, -100, 100);
 }
 if (speed == 0) {
