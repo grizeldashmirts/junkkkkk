@@ -23,6 +23,7 @@ float getDist() {
   return dist;
 }
 void motGo(int speed) {
+  originalSpeed = speed;
   speed = constrain(speed, -100, 100);
 }
 if (speed == 0) {
@@ -38,7 +39,7 @@ if (speed == 0) {
   analogWrite(in1, 0);
   analogWrite(in2, speed);
 }
-Serial.println(speed);
+Serial.println(originalSpeed);
 }
 
 void setup() {
